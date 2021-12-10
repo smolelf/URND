@@ -1,6 +1,6 @@
 <style>
     tr th, tr td{
-        padding: 1rem 1.5rem;
+        padding: 1rem 1rem;
         /*background-color: rgba(253, 150, 150, 0.644);*/
         text-align: center;
         border: 1px solid rgb(218, 218, 218);
@@ -13,9 +13,6 @@
         {{-- {{ __('Landing') }} --}}
         Users
     </div>
-    {{-- <a href="{{url('/adduser')}}" class="text-gray-500 hover:text-gray-900 text-right text-l sm:text-right sm:ml-0">
-        New Users
-    </a> --}}
 </x-slot>
 <div class="relative flex items-top justify-center bg-gray-100 dark:bg-gray-900 sm:items-center py-10">
     <div class="max-w-9xl mx-auto sm:px-6 lg:px-10">

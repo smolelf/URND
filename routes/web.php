@@ -33,6 +33,8 @@ Route::get('/addproject', [ProjectController::class, 'list']);
 
 Route::post('/projadd', [ProjectController::class, 'add']);
 
+Route::get('/editproj/{id}', [ProjectController::class, 'view']);
+
 Route::get('/edituser/{id}', [ControllersUser::class, 'view']);
 
 Route::post('/updateuser', [ControllersUser::class, 'update']);

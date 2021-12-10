@@ -21,13 +21,13 @@
 </x-slot>
 <div class="relative flex items-top justify-center bg-gray-100 dark:bg-gray-900 sm:items-center py-10">
     <div class="max-w-9xl mx-auto sm:px-6 lg:px-10">
-            {{-- {{$check}} --}}
             @if (Auth::user()->usertype == 1)
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-md sm:rounded-lg">
                 <table border="1">
                     <tr>
                         <th>Project Name</th>
                         <th>Leader</th>
+                        <th>Stage</th>
                         <th>Status</th>
                         <th>Operation</th>
                     </tr>
@@ -35,8 +35,9 @@
                     <tr>
                         <td>{{$data->proj_name}}</td>
                         <td>{{$data->name}}</td>
-                        <td>{{$data->proj_status}}</td>
-                        <td>View Detail</td>
+                        <td>{{$data->stage}}</td>
+                        <td>{{$data->stat}}</td>
+                        <td><a href="/editproj/{{$data->id}}" class="text-blue-300 hover:text-blue-600">View Detail</a></td>
                     </tr>
                     @endforeach
                 </table>
@@ -46,6 +47,7 @@
                     <tr>
                         <th>Project Name</th>
                         <th>Leader</th>
+                        <th>Stage</th>
                         <th>Status</th>
                         <th>Operation</th>
                     </tr>
@@ -53,8 +55,9 @@
                     <tr>
                         <td>{{$check->proj_name}}</td>
                         <td>{{$check->name}}</td>
-                        <td>{{$data->proj_status}}</td>
-                        <td>View Detail</td>
+                        <td>{{$check->stage}}</td>
+                        <td>{{$check->stat}}</td>
+                        <td><a href="/editproj/{{$check->id}}" class="text-blue-300 hover:text-blue-600">View Detail</a></td>
                     </tr>
                     @endforeach
                 </table>
