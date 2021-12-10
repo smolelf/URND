@@ -11,6 +11,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Controller extends BaseController
 {
@@ -34,14 +35,22 @@ class Controller extends BaseController
 
     public function home(){
         $user = Auth::user();
-        //$data = Project::all();
         return view('dashboard', ['ses' => $user]);
     }
 
     public function project(){
         $user = Auth::user();
-        $data = Project::all();
-        return view('public.landings.projects', ['data' => $data,'ses' => $user]);
+        $test = Project::all();
+        $data = DB::table('projects')->leftJoin('users','projects.leader','=','users.id')->get();
+        $check = DB::table('projects')->leftJoin('users','projects.leader','=','users.id')->where('projects.leader', '=', $user['id'])->get();
+        if ($user['usertype'] == 1){
+            return view('public.landings.projects', ['data' => $data,'ses' => $user, 'check' => $check]);
+        }elseif(isset($check)){
+            return view('public.landings.projects', ['data' => $data,'ses' => $user, 'check' => $check]);
+        }else{
+            return view('public.landings.projects', ['data' => $data,'ses' => $user, 'check' => $check]);
+        }
+        
     }
 
     public function user(){

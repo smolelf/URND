@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\User as ControllersUser;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +28,14 @@ Route::get('/home', [Controller::class, 'index']);
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return view('dashboard');
 // })->name('dashboard');
+
+Route::get('/addproject', [ProjectController::class, 'list']);
+
+Route::post('/projadd', [ProjectController::class, 'add']);
+
+Route::get('/edituser/{id}', [ControllersUser::class, 'view']);
+
+Route::post('/updateuser', [ControllersUser::class, 'update']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/home', [Controller::class, 'home'])->name('home');
 

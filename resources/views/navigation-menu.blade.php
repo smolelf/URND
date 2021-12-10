@@ -5,12 +5,13 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="{{ route('home') }}">
+                    <a href="{{ url('/') }}">
                         {{-- <x-jet-application-mark class="block h-9 w-auto" /> --}}
                         <img src="/img/unitenlogo.png" class="block h-10 w-auto" />
                     </a>
                 </div>
 
+                @auth
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
@@ -24,11 +25,13 @@
                     </x-jet-nav-link>
                 </div>
 
+                @if (Auth::user()->usertype == 1)
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('user') }}" :active="request()->routeIs('user')">
                         {{ __('Users') }}
                     </x-jet-nav-link>
                 </div>
+                @endif
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('client') }}" :active="request()->routeIs('client')">
@@ -36,13 +39,30 @@
                     </x-jet-nav-link>
                 </div>
 
+                @if (Auth::user()->usertype == 1)
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('landing') }}" :active="request()->routeIs('landing')">
                         {{ __('Test') }}
                     </x-jet-nav-link>
                 </div>
+                @endif
+
+                @else
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">
+                        {{ __('Login') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('register') }}" :active="request()->routeIs('register')">
+                        {{ __('Register') }}
+                    </x-jet-nav-link>
+                </div>
+                @endauth
             </div>
 
+            @auth
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Teams Dropdown -->
                 {{-- @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
@@ -95,7 +115,7 @@
                 @endif --}}
 
                 <!-- Settings Dropdown -->
-                <div class="ml-3 relative">
+                {{-- <div class="ml-3 relative">
                     <x-jet-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -145,7 +165,7 @@
                             </form>
                         </x-slot>
                     </x-jet-dropdown>
-                </div>
+                </div> --}}
             </div>
 
             <!-- Hamburger -->
@@ -157,25 +177,71 @@
                     </svg>
                 </button>
             </div>
+            @endauth
         </div>
     </div>
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+
+        @auth
         <div class="pt-2 pb-3 space-y-1">
             <x-jet-responsive-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
                 {{ __('Home') }}
             </x-jet-responsive-nav-link>
         </div>
 
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-responsive-nav-link href="{{ route('project') }}" :active="request()->routeIs('project')">
+                {{ __('Projects') }}
+            </x-jet-responsive-nav-link>
+        </div>
+
+        @if (Auth::user()->usertype == 1)
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-responsive-nav-link href="{{ route('user') }}" :active="request()->routeIs('user')">
+                {{ __('Users') }}
+            </x-jet-responsive-nav-link>
+        </div>
+        @endif
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-responsive-nav-link href="{{ route('client') }}" :active="request()->routeIs('client')">
+                {{ __('Client') }}
+            </x-jet-responsive-nav-link>
+        </div>
+
+        @if (Auth::user()->usertype == 1)
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-responsive-nav-link href="{{ route('landing') }}" :active="request()->routeIs('landing')">
+                {{ __('Test') }}
+            </x-jet-responsive-nav-link>
+        </div>
+        @endif
+        
+        @else
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-responsive-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">
+                {{ __('Login') }}
+            </x-jet-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-responsive-nav-link href="{{ route('register') }}" :active="request()->routeIs('register')">
+                {{ __('Register') }}
+            </x-jet-responsive-nav-link>
+        </div>
+        @endauth
+
         <!-- Responsive Settings Options -->
+        @auth
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">
-                @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                {{-- @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                     <div class="flex-shrink-0 mr-3">
                         <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                     </div>
-                @endif
+                @endif --}}
 
                 <div>
                     <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
@@ -238,5 +304,6 @@
                 @endif --}}
             </div>
         </div>
+        @endauth
     </div>
 </nav>
