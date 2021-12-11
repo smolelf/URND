@@ -48,4 +48,23 @@ class ProjectController extends Controller
         ->first();
         return view('public.editproject', ['data' => $data, 'ses' => $user, 'stage' => $stage, 'stat' => $stat]);
     }
+
+    public function update(Request $req){
+        $data = Project::find($req->id);
+
+        $data->proj_name = $req->proj_name;
+        $data->leader = $req->leader;
+        $data->proj_members = $req->proj_members;
+        $data->start_date = $req->start_date;
+        $data->end_date = $req->end_date;
+        $data->duration = $req->duration;
+        $data->cost = $req->cost;
+        $data->client = $req->client;
+        $data->proj_stage = $req->proj_stage;
+        $data->proj_status = $req->proj_status;
+
+        $data->save();
+
+        return redirect('/project');
+    }
 }

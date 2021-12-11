@@ -37,16 +37,16 @@
 
             <div class="mt-4">
                 <x-jet-label for="start_date" value="{{ __('Start Date') }}" />
-                <x-jet-input id="start_date" class="block mt-1 w-full" type="text" name="start_date" value="{{$data->start_date}}" />
+                <x-jet-input id="start_date" class="block mt-1 w-full" type="date" name="start_date" value="{{$data->start_date}}" />
             </div>
 
             <div class="mt-4">
                 <x-jet-label for="end_date" value="{{ __('End Date') }}" />
-                <x-jet-input id="end_date" class="block mt-1 w-full" type="text" name="end_date" value="{{$data->end_date}}" />
+                <x-jet-input id="end_date" class="block mt-1 w-full" type="date" name="end_date" value="{{$data->end_date}}" />
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="duration" value="{{ __('Duration') }}" />
+                <x-jet-label for="duration" value="{{ __('Duration (Months)') }}" />
                 <x-jet-input id="duration" class="block mt-1 w-full" type="text" name="duration" value="{{$data->duration}}" />
             </div>
 
