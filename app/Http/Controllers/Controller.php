@@ -69,7 +69,7 @@ class Controller extends BaseController
 
     public function client(){
         $user = Auth::user();
-        $data = Client::all();
+        $data = Client::where('id', '!=', '1')->orderBy('id')->get();
         return view('public.landings.clients', ['data' => $data,'ses' => $user]);
     }
 }

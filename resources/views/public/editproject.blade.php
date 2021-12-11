@@ -5,6 +5,7 @@
             View/Edit Project Details
         </h2>
     </x-slot>
+    {{$data->client}}
     <x-jet-authentication-card>
         <x-slot name="logo">
         </x-slot>
@@ -55,9 +56,22 @@
                 <x-jet-input id="cost" class="block mt-1 w-full" type="text" name="cost" value="{{$data->cost}}" />
             </div>
 
-            <div class="mt-4">
+            {{-- <div class="mt-4">
                 <x-jet-label for="client" value="{{ __('Client') }}" />
                 <x-jet-input id="client" class="block mt-1 w-full" type="text" name="client" value="{{$data->client}}" />
+            </div> --}}
+
+            <div class="mt-4">
+                <x-jet-label for="client" value="{{ __('Client') }}" />
+                <select id="client" 
+                class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1 w-full" 
+                name="client" required >
+                    @foreach ($client as $client)
+                        <option value="{{$client['id']}}" @if ($client['id'] == $data->client)
+                            {{{'selected'}}}
+                        @endif>{{$client['cl_name']}}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="mt-4">
@@ -93,5 +107,5 @@
             </div>
         </form>
     </x-jet-authentication-card>
-    <div class="py-8"></div>
+    <div class="py-12"></div>
 </x-app-layout>

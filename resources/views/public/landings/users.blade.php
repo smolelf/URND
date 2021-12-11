@@ -26,11 +26,25 @@
                     <th>Action</th>
                 </tr>
                 @foreach ($data as $data)
+                <div class="hidden">
+                    {{$check = DB::table('projects')->where('leader', '=', $data->id)->get();}}
+                    {{$count = $check->count();}}
+                </div>
                 <tr>
                     <td>{{$data['name']}}</td>
                     <td>{{$data['phone_no']}}</td>
                     <td>{{$data['dept']}}</td>
-                    <td>None</td>
+                    <td>
+                        @if ($count != '[]')
+                            @if ($count > 1)
+                                {{$count}} Projects
+                            @else
+                                {{$count}} Project
+                            @endif
+                        @else
+                            N/A
+                        @endif
+                    </td>
                     <td><a href="/edituser/{{$data['id']}}" class="text-blue-300 hover:text-blue-600">Edit</a></td>
                 </tr>
                 @endforeach
@@ -39,3 +53,9 @@
     </div>
 </div>
 </x-app-layout>
+            {{-- // ->leftJoin('users','projects.leader','=','users.id')
+            // ->leftJoin('proj_statuses','projects.proj_status','=','proj_statuses.id')
+            // ->leftJoin('proj_stages','projects.proj_stage','=','proj_stages.id')
+            // ->where('projects.leader', '=', $user['id'])
+            // ->select('projects.*','users.name','proj_statuses.stat_desc AS stat','proj_stages.stage_desc AS stage')
+            ->get();}} --}}

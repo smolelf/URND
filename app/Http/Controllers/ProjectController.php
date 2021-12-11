@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Project;
 use App\Models\ProjStages;
 use App\Models\ProjStatus;
@@ -38,15 +39,17 @@ class ProjectController extends Controller
         $user = Auth::user();
         $stage = ProjStages::all();
         $stat = ProjStatus::all();
+        $client = Client::orderBy('id')->get();
         // $data = Project::find($id);
         $data = DB::table('projects')
         ->leftJoin('users','projects.leader','=','users.id')
+        ->leftJoin('clients','projects.client','=','clients.id')
         ->leftJoin('proj_stages','projects.proj_stage','=','proj_stages.id')
         ->leftJoin('proj_statuses','projects.proj_status','=','proj_statuses.id')
         ->where('projects.id', '=', $id)
-        ->select('projects.*','users.name','proj_stages.id AS stageid', 'proj_statuses.id AS statusid', 'proj_stages.stage_desc', 'proj_statuses.stat_desc')
+        ->select('projects.*','users.name', 'proj_stages.stage_desc', 'proj_statuses.stat_desc','clients.cl_name')
         ->first();
-        return view('public.editproject', ['data' => $data, 'ses' => $user, 'stage' => $stage, 'stat' => $stat]);
+        return view('public.editproject', ['data' => $data, 'ses' => $user, 'stage' => $stage, 'stat' => $stat, 'client' => $client]);
     }
 
     public function update(Request $req){
