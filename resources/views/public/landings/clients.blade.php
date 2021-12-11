@@ -32,9 +32,7 @@
                     <td>{{$data['cl_name']}}</td>
                     <td>{{$data['cl_email']}}</td>
                     <td>{{$data['cl_phone_no']}}</td>
-                    <td>
-                        {{-- <a href="/edituser/{{$data['id']}}" class="text-blue-300 hover:text-blue-600">Edit</a> --}}
-                    </td>
+                    <td><a href="/editclient/{{$data['id']}}" class="text-blue-300 hover:text-blue-600">View/Edit Details</a></td>
                 </tr>
                 @endforeach
             </table>

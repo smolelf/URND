@@ -50,6 +50,10 @@ Route::get('/addclient', [ClientController::class, 'list']);
 
 Route::post('/clientadd', [ClientController::class, 'add']);
 
+Route::get('/editclient/{id}', [ClientController::class, 'view']);
+
+Route::post('/updateclient', [ClientController::class, 'update']);
+
 //Navbar Controller
 Route::middleware(['auth:sanctum', 'verified'])->get('/home', [Controller::class, 'home'])->name('home');
 

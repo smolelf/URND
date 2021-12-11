@@ -37,7 +37,7 @@
                         <td>{{$data->name}}</td>
                         <td>{{$data->stage}}</td>
                         <td>{{$data->stat}}</td>
-                        <td><a href="/editproj/{{$data->id}}" class="text-blue-300 hover:text-blue-600">View Detail</a></td>
+                        <td><a href="/editproj/{{$data->id}}" class="text-blue-300 hover:text-blue-600">View/Edit Detail</a></td>
                     </tr>
                     @endforeach
                 </table>
@@ -57,7 +57,7 @@
                         <td>{{$check->name}}</td>
                         <td>{{$check->stage}}</td>
                         <td>{{$check->stat}}</td>
-                        <td><a href="/editproj/{{$check->id}}" class="text-blue-300 hover:text-blue-600">View Detail</a></td>
+                        <td><a href="/editproj/{{$check->id}}" class="text-blue-300 hover:text-blue-600">View/Edit Detail</a></td>
                     </tr>
                     @endforeach
                 </table>
