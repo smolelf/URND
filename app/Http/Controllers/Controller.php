@@ -11,6 +11,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Controller extends BaseController
 {
@@ -34,14 +35,30 @@ class Controller extends BaseController
 
     public function home(){
         $user = Auth::user();
-        //$data = Project::all();
         return view('dashboard', ['ses' => $user]);
     }
 
     public function project(){
         $user = Auth::user();
-        $data = Project::all();
-        return view('public.landings.projects', ['data' => $data,'ses' => $user]);
+        $test = Project::all();
+        $data = DB::table('projects')
+            ->leftJoin('users','projects.leader','=','users.id')
+            ->leftJoin('proj_statuses','projects.proj_status','=','proj_statuses.id')
+            ->leftJoin('proj_stages','projects.proj_stage','=','proj_stages.id')
+            ->select('projects.*','users.name','proj_statuses.stat_desc AS stat','proj_stages.stage_desc AS stage')
+            ->get();
+        $check = DB::table('projects')
+            ->leftJoin('users','projects.leader','=','users.id')
+            ->leftJoin('proj_statuses','projects.proj_status','=','proj_statuses.id')
+            ->leftJoin('proj_stages','projects.proj_stage','=','proj_stages.id')
+            ->where('projects.leader', '=', $user['id'])
+            ->select('projects.*','users.name','proj_statuses.stat_desc AS stat','proj_stages.stage_desc AS stage')
+            ->get();
+        if ($user['usertype'] == 1){
+            return view('public.landings.projects', ['data' => $data,'ses' => $user]);
+        }else{
+            return view('public.landings.projects', ['check' => $check,'ses' => $user]);
+        }
     }
 
     public function user(){
@@ -52,7 +69,7 @@ class Controller extends BaseController
 
     public function client(){
         $user = Auth::user();
-        $data = Client::all();
+        $data = Client::where('id', '!=', '1')->orderBy('id')->get();
         return view('public.landings.clients', ['data' => $data,'ses' => $user]);
     }
 }

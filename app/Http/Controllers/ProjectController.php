@@ -2,84 +2,72 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Project;
+use App\Models\ProjStages;
+use App\Models\ProjStatus;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function list()
     {
-        //
+        $user = Auth::user();
+        $lect = User::where('usertype', '!=', '1')->get();
+        return view('public.addproject', ['lect' => $lect, 'ses' => $user]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function add(Request $req)
     {
-        //
+        $proj = new Project();
+
+        $proj -> id = "0";
+        $proj -> proj_name = $req -> proj_name;
+        $proj -> leader = $req -> leader;
+        $proj -> proj_stage = "1";
+        $proj -> proj_status = "1";
+        $proj -> save();
+
+        return redirect('/project');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function view($id)
     {
-        //
+        $user = Auth::user();
+        $stage = ProjStages::all();
+        $stat = ProjStatus::all();
+        $client = Client::orderBy('id')->get();
+        // $data = Project::find($id);
+        $data = DB::table('projects')
+        ->leftJoin('users','projects.leader','=','users.id')
+        ->leftJoin('clients','projects.client','=','clients.id')
+        ->leftJoin('proj_stages','projects.proj_stage','=','proj_stages.id')
+        ->leftJoin('proj_statuses','projects.proj_status','=','proj_statuses.id')
+        ->where('projects.id', '=', $id)
+        ->select('projects.*','users.name', 'proj_stages.stage_desc', 'proj_statuses.stat_desc','clients.cl_name')
+        ->first();
+        return view('public.editproject', ['data' => $data, 'ses' => $user, 'stage' => $stage, 'stat' => $stat, 'client' => $client, 'val' => '0']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Project $project)
-    {
-        //
-    }
+    public function update(Request $req){
+        $data = Project::find($req->id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Project $project)
-    {
-        //
-    }
+        $data->proj_name = $req->proj_name;
+        $data->leader = $req->leader;
+        $data->proj_mem_num = $req->proj_mem_num;
+        $data->start_date = $req->start_date;
+        $data->end_date = $req->end_date;
+        $data->duration = $req->duration;
+        $data->cost = $req->cost;
+        $data->client = $req->client;
+        $data->proj_stage = $req->proj_stage;
+        $data->proj_status = $req->proj_status;
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Project $project)
-    {
-        //
-    }
+        $data->save();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Project $project)
-    {
-        //
+        return redirect('/project');
     }
 }

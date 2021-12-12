@@ -1,8 +1,10 @@
 <style>
-    tr th, td{
-        padding: 10px;
-        background-color: rgba(253, 150, 150, 0.644);
+    tr th, tr td{
+        padding: 1rem 1.5rem;
+        /*background-color: rgba(253, 150, 150, 0.644);*/
         text-align: center;
+        border: 1px solid rgb(218, 218, 218);
+        border-radius: 0.5rem;
     }
 </style>
 <x-app-layout>
@@ -11,23 +13,30 @@
         {{-- {{ __('Landing') }} --}}
         Clients
     </h2>
+    <a href="{{url('/addclient')}}" class="text-gray-500 hover:text-gray-900 text-right text-l sm:text-right sm:ml-0">
+        New Client
+    </a>
 </x-slot>
-<div>
-<table border="1">
-    <tr>
-        <th>Client Name</th>
-        <th>Phone Number</th>
-    </tr>
-    {{-- @foreach ($data as $data)
-    <tr>
-        <td>{{$data['proj_name']}}</td>
-        <td>{{$data['leader']}}</td>
-    </tr>
-    @endforeach --}}
-    <tr>
-        <td>Dummy ID</td>
-        <td>Dummy Val</td>
-    </tr>
-</table>
+<div class="relative flex items-top justify-center bg-gray-100 dark:bg-gray-900 sm:items-center py-10">
+    <div class="max-w-9xl mx-auto sm:px-6 lg:px-10">
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-md sm:rounded-lg">
+            <table>
+                <tr>
+                    <th>Client Name</th>
+                    <th>Client E-Mail</th>
+                    <th>Client Phone Number</th>
+                    <th>Action</th>
+                </tr>
+                @foreach ($data as $data)
+                <tr>
+                    <td>{{$data['cl_name']}}</td>
+                    <td>{{$data['cl_email']}}</td>
+                    <td>{{$data['cl_phone_no']}}</td>
+                    <td><a href="/editclient/{{$data['id']}}" class="text-blue-300 hover:text-blue-600">View/Edit Details</a></td>
+                </tr>
+                @endforeach
+            </table>
+        </div>
+    </div>
 </div>
 </x-app-layout>
