@@ -47,6 +47,10 @@ Route::get('/editmember/{id}', [ProjMemberController::class, 'view']);
 Route::post('/updatememb', [ProjMemberController::class, 'update']);
 
 //User Controller
+Route::get('/adduser', [ControllersUser::class, 'list']);
+
+Route::post('/useradd', [ControllersUser::class, 'add']);
+
 Route::get('/edituser/{id}', [ControllersUser::class, 'view']);
 
 Route::post('/updateuser', [ControllersUser::class, 'update']);
