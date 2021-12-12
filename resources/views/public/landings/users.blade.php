@@ -22,7 +22,7 @@
                     <th>Name</th>
                     <th>Phone Number</th>
                     <th>Department</th>
-                    <th>Projects Involved</th>
+                    <th>Project(s) Lead</th>
                     <th>Action</th>
                 </tr>
                 @foreach ($data as $data)
@@ -45,7 +45,7 @@
                             N/A
                         @endif
                     </td>
-                    <td><a href="/edituser/{{$data['id']}}" class="text-blue-300 hover:text-blue-600">Edit</a></td>
+                    <td><a href="/edituser/{{$data['id']}}">Edit</a></td>
                 </tr>
                 @endforeach
             </table>

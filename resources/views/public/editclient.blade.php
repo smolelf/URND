@@ -5,7 +5,7 @@
             View/Edit Client Details
         </h2>
     </x-slot>
-
+    
     <x-jet-authentication-card>
         <x-slot name="logo">
         </x-slot>

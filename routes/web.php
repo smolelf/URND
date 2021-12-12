@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProjMemberController;
 use App\Http\Controllers\User as ControllersUser;
 use App\Models\Client;
 use App\Models\User;
@@ -39,6 +40,11 @@ Route::post('/projadd', [ProjectController::class, 'add']);
 Route::get('/editproj/{id}', [ProjectController::class, 'view']);
 
 Route::post('/updateproj', [ProjectController::class, 'update']);
+
+//ProjMember Controller
+Route::get('/editmember/{id}', [ProjMemberController::class, 'view']);
+
+Route::post('/updatememb', [ProjMemberController::class, 'update']);
 
 //User Controller
 Route::get('/edituser/{id}', [ControllersUser::class, 'view']);

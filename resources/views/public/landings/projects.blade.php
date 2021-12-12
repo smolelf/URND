@@ -29,7 +29,7 @@
                         <th>Leader</th>
                         <th>Stage</th>
                         <th>Status</th>
-                        <th>Operation</th>
+                        <th colspan="2">Operations</th>
                     </tr>
                     @foreach ($data as $data)
                     <tr>
@@ -37,7 +37,18 @@
                         <td>{{$data->name}}</td>
                         <td>{{$data->stage}}</td>
                         <td>{{$data->stat}}</td>
-                        <td><a href="/editproj/{{$data->id}}" class="text-blue-300 hover:text-blue-600">View/Edit Detail</a></td>
+                        @if ($data->proj_stage == '6' AND $data->proj_status == '5')
+                            <td><h1 class=" text-gray-400">Closed</h1></td>
+                        @else
+                            <td><a href="/editproj/{{$data->id}}" class="text-blue-300 hover:text-blue-600">View Detail</a></td>
+                        @endif
+                        @if ($data->proj_stage == '6' AND $data->proj_status == '5')
+                            <td><h1 class=" text-gray-400">Closed</h1></td>
+                        @elseif($data->proj_mem_num != null)
+                            <td><a href="/editmember/{{$data->id}}" class="text-blue-300 hover:text-blue-600">Manage Member</a></td>
+                        @else
+                            <td><h1 class=" text-gray-400">No Member</h1></td>
+                        @endif
                     </tr>
                     @endforeach
                 </table>
@@ -49,7 +60,7 @@
                         <th>Leader</th>
                         <th>Stage</th>
                         <th>Status</th>
-                        <th>Operation</th>
+                        <th colspan="2">Operations</th>
                     </tr>
                     @foreach ($check as $check)
                     <tr>
@@ -57,7 +68,18 @@
                         <td>{{$check->name}}</td>
                         <td>{{$check->stage}}</td>
                         <td>{{$check->stat}}</td>
-                        <td><a href="/editproj/{{$check->id}}" class="text-blue-300 hover:text-blue-600">View/Edit Detail</a></td>
+                        @if ($check->proj_stage == '6' AND $check->proj_status == '5')
+                            <td><h1 class=" text-gray-400">Closed</h1></td>
+                        @else
+                            <td><a href="/editproj/{{$check->id}}" class="text-blue-300 hover:text-blue-600">View Detail</a></td>
+                        @endif
+                        @if ($check->proj_stage == '6' AND $check->proj_status == '5')
+                            <td><h1 class=" text-gray-400">Closed</h1></td>
+                        @elseif($check->proj_mem_num != null)
+                            <td><a href="/editmember/{{$check->id}}" class="text-blue-300 hover:text-blue-600">Manage Member</a></td>
+                        @else
+                            <td><h1 class=" text-gray-400">No Member</h1></td>
+                        @endif
                     </tr>
                     @endforeach
                 </table>

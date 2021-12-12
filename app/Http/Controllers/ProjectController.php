@@ -16,7 +16,7 @@ class ProjectController extends Controller
     public function list()
     {
         $user = Auth::user();
-        $lect = User::all();
+        $lect = User::where('usertype', '!=', '1')->get();
         return view('public.addproject', ['lect' => $lect, 'ses' => $user]);
     }
 
@@ -49,7 +49,7 @@ class ProjectController extends Controller
         ->where('projects.id', '=', $id)
         ->select('projects.*','users.name', 'proj_stages.stage_desc', 'proj_statuses.stat_desc','clients.cl_name')
         ->first();
-        return view('public.editproject', ['data' => $data, 'ses' => $user, 'stage' => $stage, 'stat' => $stat, 'client' => $client]);
+        return view('public.editproject', ['data' => $data, 'ses' => $user, 'stage' => $stage, 'stat' => $stat, 'client' => $client, 'val' => '0']);
     }
 
     public function update(Request $req){
@@ -57,7 +57,7 @@ class ProjectController extends Controller
 
         $data->proj_name = $req->proj_name;
         $data->leader = $req->leader;
-        $data->proj_members = $req->proj_members;
+        $data->proj_mem_num = $req->proj_mem_num;
         $data->start_date = $req->start_date;
         $data->end_date = $req->end_date;
         $data->duration = $req->duration;

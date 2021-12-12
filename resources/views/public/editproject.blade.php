@@ -5,12 +5,13 @@
             View/Edit Project Details
         </h2>
     </x-slot>
-    {{$data->client}}
+
     <x-jet-authentication-card>
         <x-slot name="logo">
         </x-slot>
         <form method="POST" action="{{ url('updateproj') }}">
             @csrf
+
             <div class="hidden">
                 <x-jet-label for="id" value="{{ __('ID') }}" />
                 <x-jet-input id="id" class="block mt-1 w-full" type="text" name="id" value="{{$data->id}}" required />
@@ -23,18 +24,81 @@
 
             <div class="mt-4">
                 <x-jet-label for="leader1" value="{{ __('Project Leader') }}" />
-                <x-jet-input id="leader1" class="block mt-1 w-full" type="text" name="leader1" value="{{$data->name}}" readonly disabled />
+                <x-jet-input id="leader1" class="block mt-1 w-full text-gray-400" type="text" name="leader1" value="{{$data->name}}" readonly disabled />
             </div>
 
             <div class="hidden">
                 <x-jet-label for="leader" value="{{ __('Project Leader') }}" />
                 <x-jet-input id="leader" class="block mt-1 w-full" type="text" name="leader" value="{{$data->leader}}"  />
             </div>
-
-            <div class="mt-4">
-                <x-jet-label for="proj_members" value="{{ __('Project Members') }}" />
-                <x-jet-input id="proj_members" class="block mt-1 w-full" type="text" name="proj_members" value="{{$data->proj_members}}" />
+            <div class="hidden">
+                {{$count = $data->proj_mem_num}}
             </div>
+            {{-- @if ($count > 0)
+                @if ($count == 1)
+                    <div class="mt-4">
+                        <x-jet-label for="proj_mem_num1" value="{{ __('No. of Project Members') }}" />
+                        <x-jet-input id="proj_mem_num1" class="mt-1 w-full text-gray-400 flex text-left" type="text" name="proj_mem_num1"
+                        value="{{$count}} Member"
+                        readonly disabled  />
+                    </div>
+                @else
+                    <div class="mt-4">
+                        <x-jet-label for="proj_mem_num1" value="{{ __('No. of Project Members') }}" />
+                        <div class="flex mt-1">
+                            <x-jet-input id="proj_mem_num1" class="w-full text-gray-400 flex text-left" type="text" name="proj_mem_num1"
+                            value="{{$count}} Members"
+                            readonly disabled  />
+                            @if ($data->proj_mem_num != null)
+                                <div class="px-2"></div>
+                                <button href="{{url('/editmember/'.$data->id)}}" class="text-right w-auto inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
+                                    Manage
+                                </button>
+                            @endif
+                        </div>
+                    </div>
+                @endif
+                <div class="hidden">
+                    <x-jet-input id="proj_mem_num" class="block mt-1 w-full" type="text" name="proj_mem_num" value="{{$data->proj_mem_num}}"  />
+                </div>
+            @else --}}
+                <div class="mt-4">
+                    <x-jet-label for="proj_mem_num" value="{{ __('No. of Project Members (Can be changed only ONCE)') }}" />
+                    <div class="flex mt-1">
+                        <select id="proj_mem_num" 
+                        class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-full text-left" 
+                        name="proj_mem_num" >
+                        @for ($i = 0; $i < 4; $i++)
+                            <option value="{{$i}}" @if ($data->proj_mem_num == $i) selected @endif>
+                                @if ($i == '0')
+                                    None 
+                                @elseif ($i == '1')
+                                    1 Member
+                                @else
+                                    {{$i}} Members
+                                @endif
+                            </option>
+                        @endfor
+                        </select>
+                        
+                    </div>
+                </div>
+            {{-- @endif --}}
+
+            {{-- <div class="">{{$val = Input::get('mem_cnt')}}</div> --}}
+
+            {{-- <div class="mt-4">
+                <x-jet-label for="client" value="{{ __('Project Members') }}" />
+                <select id="client" 
+                class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1 w-full" 
+                name="client" required >
+                    @foreach ($val as $client)
+                        <option value="{{$client['id']}}" @if ($client['id'] == $data->client)
+                            {{{'selected'}}}
+                        @endif>{{$client['cl_name']}}</option>
+                    @endforeach
+                </select>
+            </div> --}}
 
             <div class="mt-4">
                 <x-jet-label for="start_date" value="{{ __('Start Date') }}" />
@@ -55,11 +119,6 @@
                 <x-jet-label for="cost" value="{{ __('Cost (RM)') }}" />
                 <x-jet-input id="cost" class="block mt-1 w-full" type="text" name="cost" value="{{$data->cost}}" />
             </div>
-
-            {{-- <div class="mt-4">
-                <x-jet-label for="client" value="{{ __('Client') }}" />
-                <x-jet-input id="client" class="block mt-1 w-full" type="text" name="client" value="{{$data->client}}" />
-            </div> --}}
 
             <div class="mt-4">
                 <x-jet-label for="client" value="{{ __('Client') }}" />
