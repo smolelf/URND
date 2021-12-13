@@ -64,4 +64,12 @@ class User extends Controller
 
         return redirect('/user');
     }
+
+    function deluser($id){
+        $data = ModelsUser::find($id);
+
+        $data->delete();
+
+        return redirect('/user');
+    }
 }

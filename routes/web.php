@@ -55,6 +55,8 @@ Route::get('/edituser/{id}', [ControllersUser::class, 'view']);
 
 Route::post('/updateuser', [ControllersUser::class, 'update']);
 
+Route::get('/deluser/{id}', [ControllersUser::class, 'deluser']);
+
 //Client Controller
 Route::get('/addclient', [ClientController::class, 'list']);
 

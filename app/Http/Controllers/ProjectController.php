@@ -55,6 +55,18 @@ class ProjectController extends Controller
     public function update(Request $req){
         $data = Project::find($req->id);
 
+        $mem_cnt = $req->proj_mem_num;
+        if ($mem_cnt == null OR $mem_cnt == "0"){
+            $data->proj_mem_num1 = null;
+            $data->proj_mem_num2 = null;
+            $data->proj_mem_num3 = null;
+        }elseif ($mem_cnt == "1"){
+            $data->proj_mem_num2 = null;
+            $data->proj_mem_num3 = null;
+        }elseif ($mem_cnt == "2"){
+            $data->proj_mem_num3 = null;
+        }
+
         $data->proj_name = $req->proj_name;
         $data->leader = $req->leader;
         $data->proj_mem_num = $req->proj_mem_num;

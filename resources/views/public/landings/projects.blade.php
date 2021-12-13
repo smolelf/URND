@@ -44,7 +44,7 @@
                         @endif
                         @if ($data->proj_stage == '6' AND $data->proj_status == '5')
                             <td><h1 class=" text-gray-400">Closed</h1></td>
-                        @elseif($data->proj_mem_num != null)
+                        @elseif($data->proj_mem_num != null OR $data->proj_mem_num != "0")
                             <td><a href="/editmember/{{$data->id}}" class="text-blue-300 hover:text-blue-600">Manage Member</a></td>
                         @else
                             <td><h1 class=" text-gray-400">No Member</h1></td>
