@@ -33,46 +33,54 @@ Route::get('/home', [Controller::class, 'index']);
 // })->name('dashboard');
 
 //Project Controller
-Route::get('/addproject', [ProjectController::class, 'list']);
+Route::get('/addproject', [ProjectController::class, 'list'])->name('project');
 
 Route::post('/projadd', [ProjectController::class, 'add']);
 
-Route::get('/editproj/{id}', [ProjectController::class, 'view']);
+Route::get('/editproj/{id}', [ProjectController::class, 'view'])->name('project');
 
 Route::post('/updateproj', [ProjectController::class, 'update']);
 
 //ProjMember Controller
-Route::get('/editmember/{id}', [ProjMemberController::class, 'view']);
+Route::get('/editmember/{id}', [ProjMemberController::class, 'view'])->name('project');
 
 Route::post('/updatememb', [ProjMemberController::class, 'update']);
 
 //User Controller
-Route::get('/adduser', [ControllersUser::class, 'list']);
+Route::get('/adduser', [ControllersUser::class, 'list'])->name('user');
 
 Route::post('/useradd', [ControllersUser::class, 'add']);
 
-Route::get('/edituser/{id}', [ControllersUser::class, 'view']);
+Route::get('/edituser/{id}', [ControllersUser::class, 'view'])->name('user');
 
 Route::post('/updateuser', [ControllersUser::class, 'update']);
 
 Route::get('/deluser/{id}', [ControllersUser::class, 'deluser']);
 
+//User Controller (User Profile)
+
+Route::get('/editself/{id}', [ControllersUser::class, 'self'])->name('profile');
+
+Route::post('/updateself', [ControllersUser::class, 'updateself']);
+
+Route::post('/updateselfpw', [ControllersUser::class, 'updateselfpw']);
+
 //Client Controller
-Route::get('/addclient', [ClientController::class, 'list']);
+Route::get('/addclient', [ClientController::class, 'list'])->name('client');
 
 Route::post('/clientadd', [ClientController::class, 'add']);
 
-Route::get('/editclient/{id}', [ClientController::class, 'view']);
+Route::get('/editclient/{id}', [ClientController::class, 'view'])->name('client');
 
 Route::post('/updateclient', [ClientController::class, 'update']);
 
 //Navbar Controller
-Route::middleware(['auth:sanctum', 'verified'])->get('/home', [Controller::class, 'home'])->name('home');
+Route::get('/home', [Controller::class, 'home'])->name('home');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/project', [Controller::class, 'project'])->name('project');
+Route::get('/project', [Controller::class, 'project'])->name('project');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/user', [Controller::class, 'user'])->name('user');
+Route::get('/user', [Controller::class, 'user'])->name('user');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/client', [Controller::class, 'client'])->name('client');
+Route::get('/client', [Controller::class, 'client'])->name('client');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/landing', [Controller::class, 'landing'])->name('landing');
+Route::get('/landing', [Controller::class, 'landing'])->name('landing');

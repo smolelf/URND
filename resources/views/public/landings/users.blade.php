@@ -28,7 +28,9 @@
                     <th>Phone Number</th>
                     <th>Department</th>
                     <th>Project(s) Lead</th>
-                    <th @if (Auth::user()->usertype == 1) colspan="2" @endif>Action</th>
+                    @if (Auth::user()->usertype == 1)
+                    <th colspan="2">Action</th>
+                    @endif
                 </tr>
                 @foreach ($data as $data)
                 <div class="hidden">
@@ -50,10 +52,8 @@
                         N/A
                     @endif
                     </td>
-                    @if ($data['id'] == Auth::user()->id OR Auth::user()->usertype == 1)
+                    @if (Auth::user()->usertype == 1)
                         <td><a href="/edituser/{{$data['id']}}">Edit</a></td>
-                    @else
-                    <td><h1 class="text-gray-400">Edit</h1></td>
                     @endif
                     @if (Auth::user()->usertype == 1)
                         @if ($data['usertype'] == 1 OR $count != '[]')
