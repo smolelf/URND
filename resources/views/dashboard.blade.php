@@ -2,7 +2,7 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{-- {{ __('Dashboard') }} --}}
-            Welcome Back, {{$ses['name']}}
+            Welcome Back, {{Auth::user()->name}}
         </h2>
     </x-slot>
 

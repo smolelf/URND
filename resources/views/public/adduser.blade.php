@@ -1,3 +1,4 @@
+@if (Auth::user()->usertype == 1)
 <x-app-layout>
     <x-guest-layout>
         <x-jet-authentication-card>
@@ -39,4 +40,9 @@
             </form>
         </x-jet-authentication-card>
     </x-guest-layout>
-    </x-app-layout>
+</x-app-layout>
+@else
+<script type="text/javascript">
+    window.location = "{{ url('/user') }}";
+</script>
+@endauth

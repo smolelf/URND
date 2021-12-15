@@ -1,3 +1,4 @@
+@if (Auth::user()->usertype == 1)
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -37,11 +38,27 @@
                 <x-jet-input id="dept" class="block mt-1 w-full" type="text" name="dept" value="{{$data['dept']}}" />
             </div>
 
+            <div class="mt-4">
+                <x-jet-label for="usertype" value="{{ __('Admin/Project Manager') }}" />
+                <select id="usertype" 
+                        class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-full text-left" 
+                        name="usertype" >
+                    <option value="0" @if ($data->usertype == 0) selected @endif>No</option>
+                    <option value="1" @if ($data->usertype == 1) selected @endif>Yes</option>
+                </select>
+            </div>
+
             <div class="flex items-center justify-end mt-4">
                 <x-jet-button>
                     {{ __('Update User Details') }}
                 </x-jet-button>
             </div>
+
         </form>
     </x-jet-authentication-card>
 </x-app-layout>
+@else
+<script type="text/javascript">
+    window.location = "{{ url('/user') }}";
+</script>
+@endauth

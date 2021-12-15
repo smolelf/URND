@@ -9,6 +9,10 @@
         </div>
     </div>
 
+    <div class="hidden">
+        {{$data = Auth::user()}}
+    </div>
+
     <div class="mt-5 md:mt-0 md:col-span-2">
         <form method="POST" action="{{ url('updateself') }}">
             @csrf

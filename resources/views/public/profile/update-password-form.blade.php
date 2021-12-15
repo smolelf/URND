@@ -9,6 +9,10 @@
         </div>
     </div>
 
+    <div class="hidden">
+        {{$data = Auth::user()}}
+    </div>
+
     <div class="mt-5 md:mt-0 md:col-span-2">
         <form method="POST" action="{{ url('updateselfpw') }}">
             @csrf
@@ -23,21 +27,21 @@
                     <!-- Current Password -->
                     <div class="col-span-6 sm:col-span-4">
                         <x-jet-label for="cpw" value="{{ __('Current Password') }}" />
-                        <x-jet-input id="cpw" type="text" class="mt-1 block w-full" name="cpw" required />
+                        <x-jet-input id="cpw" type="password" class="mt-1 block w-full" name="cpw" required />
                         <x-jet-input-error for="cpw" class="mt-2" />
                     </div>
 
                     <!-- New Password -->
                     <div class="col-span-6 sm:col-span-4">
                         <x-jet-label for="pw" value="{{ __('New Password') }}" />
-                        <x-jet-input id="pw" type="text" class="mt-1 block w-full" name="pw" required />
+                        <x-jet-input id="pw" type="password" class="mt-1 block w-full" name="pw" required />
                         <x-jet-input-error for="pw" class="mt-2" />
                     </div>
 
                     <!-- Confirm Password -->
                     <div class="col-span-6 sm:col-span-4">
                         <x-jet-label for="cfpw" value="{{ __('Confirm New Password') }}" />
-                        <x-jet-input id="cfpw" type="text" class="mt-1 block w-full" name="cfpw" required />
+                        <x-jet-input id="cfpw" type="password" class="mt-1 block w-full" name="cfpw" required />
                         <x-jet-input-error for="cfpw" class="mt-2" />
                     </div>
 

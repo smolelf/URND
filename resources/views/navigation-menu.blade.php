@@ -139,7 +139,7 @@
                                 {{ __('Profile') }}
                             </x-jet-dropdown-link> --}}
 
-                            <x-jet-dropdown-link href="{{ url('/editself/'.Auth::user()->id) }}">
+                            <x-jet-dropdown-link href="{{ url('/editself') }}">
                                 {{ __('View Profile') }}
                             </x-jet-dropdown-link>
 
@@ -256,7 +256,7 @@
                     {{ __('Profile') }}
                 </x-jet-responsive-nav-link> --}}
 
-                <x-jet-responsive-nav-link href="{{ url('/editself/'.Auth::user()->id) }}" :active="request()->routeIs('profile')">
+                <x-jet-responsive-nav-link href="{{ url('/editself') }}" :active="request()->routeIs('profile')">
                     {{ __('View Profile') }}
                 </x-jet-responsive-nav-link>
 

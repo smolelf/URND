@@ -59,6 +59,7 @@ class User extends Controller
         $data->email = $req->email;
         $data->phone_no = $req->phone_no;
         $data->dept = $req->dept;
+        $data->usertype = $req->usertype;
 
         $data->save();
 
@@ -73,9 +74,9 @@ class User extends Controller
         return redirect('/user');
     }
 
-    public function self($id){
-        $data = ModelsUser::find($id);
-        return view('public.profile.show', ['data' => $data]);
+    public function self(){
+        //$data = ModelsUser::find($id);
+        return view('public.landings.show');
     }
 
     public function updateself(Request $req){
@@ -100,7 +101,7 @@ class User extends Controller
 
         $data->save();
 
-        return redirect('/editself/'.$req->id);
+        return redirect('/editself')->with(['status' => 'Profile updated.']);
     }
 
     public function updateselfpw(Request $req){
@@ -124,7 +125,8 @@ class User extends Controller
         }
 
         if ($msg_pw != null OR $msg_cfpw != null){
-            return back()->withErrors(['cpw' => $msg_pw, 'pw' => $msg_cfpw]);
+            return back()
+            ->withErrors(['cpw' => $msg_pw, 'pw' => $msg_cfpw]);
         }
 
         $hpw = Hash::make($pw);

@@ -17,12 +17,12 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function index(){
-        return view('public.index');
-    }
+    // public function index(){
+    //     return view('public.index');
+    // }
 
     public function landing(){
-        $user = Auth::user();
+        // $user = Auth::user();
         // if ($user['usertype'] == 0){
         //     $datap = Project::all();
         //     return view('public.landing', ['datap' => $datap,'ses' => $user]);
@@ -30,12 +30,11 @@ class Controller extends BaseController
         //     $datau = User::all();
         //     return view('public.landing', ['datau' => $datau,'ses' => $user]);
         // }
-        return view('public.landing', ['ses' => $user]);
+        return view('public.landing');
     }
 
     public function home(){
-        $user = Auth::user();
-        return view('dashboard', ['ses' => $user]);
+        return view('dashboard');
     }
 
     public function project(){
@@ -55,21 +54,21 @@ class Controller extends BaseController
             ->select('projects.*','users.name','proj_statuses.stat_desc AS stat','proj_stages.stage_desc AS stage')
             ->get();
         if ($user['usertype'] == 1){
-            return view('public.landings.projects', ['data' => $data,'ses' => $user]);
+            return view('public.landings.projects', ['data' => $data]);
         }else{
-            return view('public.landings.projects', ['check' => $check,'ses' => $user]);
+            return view('public.landings.projects', ['check' => $check]);
         }
     }
 
     public function user(){
         $user = Auth::user();
         $data = User::all();
-        return view('public.landings.users', ['data' => $data,'ses' => $user]);
+        return view('public.landings.users', ['data' => $data]);
     }
 
     public function client(){
         $user = Auth::user();
         $data = Client::where('id', '!=', '1')->orderBy('id')->get();
-        return view('public.landings.clients', ['data' => $data,'ses' => $user]);
+        return view('public.landings.clients', ['data' => $data]);
     }
 }

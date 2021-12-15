@@ -1,7 +1,8 @@
+@auth
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Custom Profile') }}
+            {{ __('View Profile') }}
         </h2>
     </x-slot>
 
@@ -13,7 +14,9 @@
             <x-jet-section-border />
 
             <div class="mt-10 sm:mt-0">
+
                 @include('public.profile.update-password-form')
+
             </div>
             {{-- <x-jet-section-border />
 
@@ -24,3 +27,10 @@
         </div>
     </div>
 </x-app-layout>
+@else
+<script type="text/javascript">
+    window.setTimeout(function() {
+        window.location = "{{ url('/') }}";
+    }, 0);
+</script>
+@endauth
