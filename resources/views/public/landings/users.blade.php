@@ -53,7 +53,11 @@
                     @endif
                     </td>
                     @if (Auth::user()->usertype == 1)
-                        <td><a href="/edituser/{{$data['id']}}" class="underline" style="color:rgb(0, 104, 122)">Edit</a></td>
+                        @if (Auth::user()->id != $data->id)
+                            <td><a href="/edituser/{{$data['id']}}" class="underline" style="color:rgb(0, 104, 122)">Edit</a></td>
+                        @else
+                            <td><h1 class="text-gray-400">Edit</h1></td>
+                        @endif
                     @endif
                     @if (Auth::user()->usertype == 1)
                         @if ($data['usertype'] == 1 OR $count != '[]')

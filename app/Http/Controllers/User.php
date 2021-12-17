@@ -137,4 +137,14 @@ class User extends Controller
 
         return redirect('/');
     }
+
+    function resetpw(Request $req){
+        $data = ModelsUser::find($req->id);
+
+        $data->password = Hash::make('12345678');
+
+        $data->save();
+
+        return redirect('/user');
+    }
 }

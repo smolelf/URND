@@ -57,6 +57,8 @@ Route::middleware(['auth:sanctum', 'verified'])->post('/updateuser', [Controller
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/deluser/{id}', [ControllersUser::class, 'deluser']);
 
+Route::middleware(['auth:sanctum', 'verified'])->post('/resetpw', [ControllersUser::class, 'resetpw']);
+
 //User Controller (User Profile)
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/editself', [ControllersUser::class, 'self'])->name('profile');
