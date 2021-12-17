@@ -29,6 +29,8 @@ class ProjectController extends Controller
         $proj -> leader = $req -> leader;
         $proj -> proj_stage = "1";
         $proj -> proj_status = "1";
+        $proj -> proj_mem_num = "0";
+        $proj -> proj_type = $req -> proj_type;
         $proj -> save();
 
         return redirect('/project');
@@ -69,6 +71,7 @@ class ProjectController extends Controller
 
         $data->proj_name = $req->proj_name;
         $data->leader = $req->leader;
+        $data->proj_type = $req->proj_type;
         $data->proj_mem_num = $req->proj_mem_num;
         $data->start_date = $req->start_date;
         $data->end_date = $req->end_date;

@@ -24,22 +24,44 @@ class Controller extends BaseController
     public function project(){
         $user = Auth::user();
         if ($user['usertype'] == 1){
-            $data = DB::table('projects')
+            $cons = DB::table('projects')
                 ->leftJoin('users','projects.leader','=','users.id')
                 ->leftJoin('proj_statuses','projects.proj_status','=','proj_statuses.id')
                 ->leftJoin('proj_stages','projects.proj_stage','=','proj_stages.id')
+                ->where('proj_type', '=', '0')
                 ->select('projects.*','users.name','proj_statuses.stat_desc AS stat','proj_stages.stage_desc AS stage')
                 ->get();
         }else{
-            $data = DB::table('projects')
+            $cons = DB::table('projects')
                 ->leftJoin('users','projects.leader','=','users.id')
                 ->leftJoin('proj_statuses','projects.proj_status','=','proj_statuses.id')
                 ->leftJoin('proj_stages','projects.proj_stage','=','proj_stages.id')
                 ->where('projects.leader', '=', $user['id'])
+                ->where('proj_type', '=', '0')
                 ->select('projects.*','users.name','proj_statuses.stat_desc AS stat','proj_stages.stage_desc AS stage')
                 ->get();
         }
-        return view('public.landings.projects', ['data' => $data]);
+
+        if ($user['usertype'] == 1){
+            $rsch = DB::table('projects')
+                ->leftJoin('users','projects.leader','=','users.id')
+                ->leftJoin('proj_statuses','projects.proj_status','=','proj_statuses.id')
+                ->leftJoin('proj_stages','projects.proj_stage','=','proj_stages.id')
+                ->where('proj_type', '=', '1')
+                ->select('projects.*','users.name','proj_statuses.stat_desc AS stat','proj_stages.stage_desc AS stage')
+                ->get();
+        }else{
+            $rsch = DB::table('projects')
+                ->leftJoin('users','projects.leader','=','users.id')
+                ->leftJoin('proj_statuses','projects.proj_status','=','proj_statuses.id')
+                ->leftJoin('proj_stages','projects.proj_stage','=','proj_stages.id')
+                ->where('projects.leader', '=', $user['id'])
+                ->where('proj_type', '=', '1')
+                ->select('projects.*','users.name','proj_statuses.stat_desc AS stat','proj_stages.stage_desc AS stage')
+                ->get();
+        }
+
+        return view('public.landings.projects', ['cons' => $cons, 'rsch' => $rsch]);
     }
 
     public function user(){

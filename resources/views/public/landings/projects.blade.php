@@ -21,43 +21,88 @@
 </x-slot>
 <div class="relative flex items-top justify-center bg-gray-100 dark:bg-gray-900 sm:items-center py-10">
     <div class="max-w-9xl mx-auto sm:px-6 lg:px-10">
-            @if ($data != '[]')
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-md sm:rounded-lg">
-                <table border="1">
-                    <tr>
-                        <th>Project Name</th>
-                        <th>Leader</th>
-                        <th>Stage</th>
-                        <th>Status</th>
-                        <th colspan="2">Operations</th>
-                    </tr>
-                    @foreach ($data as $data)
-                    <tr>
-                        <td>{{$data->proj_name}}</td>
-                        <td>{{$data->name}}</td>
-                        <td>{{$data->stage}}</td>
-                        <td>{{$data->stat}}</td>
-                        @if ($data->proj_stage == '6' AND $data->proj_status == '5')
-                            <td><h1 class=" text-gray-400">Closed</h1></td>
-                        @else
-                            <td><a href="/editproj/{{$data->id}}" class="text-blue-300 hover:text-blue-600">View Detail</a></td>
-                        @endif
-                        @if ($data->proj_stage == '6' AND $data->proj_status == '5')
-                            <td><h1 class=" text-gray-400">Closed</h1></td>
-                        @elseif($data->proj_mem_num != null OR $data->proj_mem_num != "0")
-                            <td><a href="/editmember/{{$data->id}}" class="text-indigo-300 hover:text-indigo-600">Manage Member</a></td>
-                        @else
-                            <td><h1 class=" text-gray-400">No Member</h1></td>
-                        @endif
-                    </tr>
-                    @endforeach
-                </table>
-            @else
-            <div class="mt-8 pt-8">
-                <h1 class="text-4xl font-semibold"> No Project Involved </h1>
-            @endif
+        @if ($cons != '[]')
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-md sm:rounded-lg">
+            <div>
+                <h1 class="text-2xl px-4 py-4 text-gray-700 font-semibold">Consultancy Project</h1>
             </div>
+            <table border="1" class="w-full">
+                <tr>
+                    <th>Project Name</th>
+                    <th>Leader</th>
+                    <th>Stage</th>
+                    <th>Status</th>
+                    <th colspan="2">Operations</th>
+                </tr>
+                @foreach ($cons as $cons)
+                <tr>
+                    <td>{{$cons->proj_name}}</td>
+                    <td>{{$cons->name}}</td>
+                    <td>{{$cons->stage}}</td>
+                    <td>{{$cons->stat}}</td>
+                    @if ($cons->proj_stage == '6' AND $cons->proj_status == '5')
+                        <td><h1 class=" text-gray-400">Closed</h1></td>
+                    @else
+                        <td><a href="/editproj/{{$cons->id}}" class="text-blue-300 hover:text-blue-600">View Detail</a></td>
+                    @endif
+                    @if ($cons->proj_stage == '6' AND $cons->proj_status == '5')
+                        <td><h1 class=" text-gray-400">Closed</h1></td>
+                    @elseif($cons->proj_mem_num > 0)
+                        <td><a href="/editmember/{{$cons->id}}" class="text-indigo-300 hover:text-indigo-600">Manage Member</a></td>
+                    @else
+                        <td><h1 class=" text-gray-400">No Member</h1></td>
+                    @endif
+                </tr>
+                @endforeach
+            </table>
         </div>
+        @else
+        <div class="py-4">
+            <h1 class="text-4xl font-semibold text-center"> No Consultancy Project Involved </h1>
+        </div>
+        @endif
+        <x-jet-section-border />
+        @if ($rsch != '[]')
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-md sm:rounded-lg">
+            <div>
+                <h1 class="text-2xl px-4 py-4 text-gray-700 font-semibold">Research Grant Project</h1>
+            </div>
+            <table border="1" class="w-full">
+                <tr>
+                    <th>Project Name</th>
+                    <th>Leader</th>
+                    <th>Stage</th>
+                    <th>Status</th>
+                    <th colspan="2">Operations</th>
+                </tr>
+                @foreach ($rsch as $rsch)
+                <tr>
+                    <td>{{$rsch->proj_name}}</td>
+                    <td>{{$rsch->name}}</td>
+                    <td>{{$rsch->stage}}</td>
+                    <td>{{$rsch->stat}}</td>
+                    @if ($rsch->proj_stage == '6' AND $rsch->proj_status == '5')
+                        <td><h1 class=" text-gray-400">Closed</h1></td>
+                    @else
+                        <td><a href="/editproj/{{$rsch->id}}" class="text-blue-300 hover:text-blue-600">View Detail</a></td>
+                    @endif
+                    @if ($rsch->proj_stage == '6' AND $rsch->proj_status == '5')
+                        <td><h1 class=" text-gray-400">Closed</h1></td>
+                    @elseif($rsch->proj_mem_num > 0)
+                        <td><a href="/editmember/{{$rsch->id}}" class="text-indigo-300 hover:text-indigo-600">Manage Member</a></td>
+                    @else
+                        <td><h1 class=" text-gray-400">No Member</h1></td>
+                    @endif
+                </tr>
+                @endforeach
+            </table>
+        </div>
+        @else
+        <div class="py-4">
+            <h1 class="text-4xl font-semibold text-center"> No Research Project Involved </h1>
+        </div>
+        <x-jet-section-border />
+        @endif
     </div>
 </div>
 </x-app-layout>

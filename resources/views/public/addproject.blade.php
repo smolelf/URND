@@ -29,7 +29,15 @@
                 </select>
             </div>
 
-            
+            <div class="mt-4">
+                <x-jet-label for="proj_type" value="{{ __('Project Type') }}" />
+                <select id="proj_type" 
+                class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1 w-full" 
+                name="proj_type" required >
+                    <option value="0">Consultancy Project</option>
+                    <option value="1">Research Grant Project</option>
+                </select>
+            </div>
 
             <div class="flex items-center justify-end mt-4">
                 <x-jet-button>

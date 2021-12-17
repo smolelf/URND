@@ -39,13 +39,13 @@
                     </x-jet-nav-link>
                 </div>
 
-                @if (Auth::user()->usertype == 1)
+                {{-- @if (Auth::user()->usertype == 1)
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('landing') }}" :active="request()->routeIs('landing')">
                         {{ __('Test') }}
                     </x-jet-nav-link>
                 </div>
-                @endif
+                @endif --}}
 
                 @else
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -212,13 +212,13 @@
             </x-jet-responsive-nav-link>
         </div>
 
-        @if (Auth::user()->usertype == 1)
+        {{-- @if (Auth::user()->usertype == 1)
         <div class="pt-2 pb-3 space-y-1">
             <x-jet-responsive-nav-link href="{{ route('landing') }}" :active="request()->routeIs('landing')">
                 {{ __('Test') }}
             </x-jet-responsive-nav-link>
         </div>
-        @endif
+        @endif --}}
         
         @else
         <div class="pt-2 pb-3 space-y-1">
