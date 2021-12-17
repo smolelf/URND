@@ -1,6 +1,6 @@
 <style>
     tr th, tr td{
-        padding: 1rem 1.5rem;
+        padding: 1rem 1rem;
         /*background-color: rgba(253, 150, 150, 0.644);*/
         text-align: center;
         border: 1px solid rgb(218, 218, 218);
@@ -32,7 +32,7 @@
                     <td>{{$data['cl_name']}}</td>
                     <td>{{$data['cl_email']}}</td>
                     <td>{{$data['cl_phone_no']}}</td>
-                    <td><a href="/editclient/{{$data['id']}}" class="text-blue-300 hover:text-blue-600">View/Edit Details</a></td>
+                    <td><a href="/editclient/{{$data['id']}}" class="underline" style="color:rgb(0, 104, 122)">View Details</a></td>
                 </tr>
                 @endforeach
             </table>

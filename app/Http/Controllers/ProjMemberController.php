@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
-use App\Models\ProjMember;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,8 +17,6 @@ class ProjMemberController extends Controller
         ->where('projects.id', '=', $id)
         ->first();
         $lect = User::where('id', '!=', '1')->where('id', '!=', $data->leader)->get();
-        $client = ProjMember::orderBy('id')->get();
-        // $data = Project::find($id);
         return view('public.editmember', ['data' => $data, 'ses' => $user, 'lect' => $lect, 'proj_id' => $id]);
     }
 

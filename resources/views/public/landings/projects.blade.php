@@ -1,6 +1,6 @@
 <style>
     tr th, tr td{
-        padding: 1rem 1.5rem;
+        padding: 1rem 1rem;
         /*background-color: rgba(253, 150, 150, 0.644);*/
         text-align: center;
         border: 1px solid rgb(218, 218, 218);
@@ -26,7 +26,7 @@
             <div>
                 <h1 class="text-2xl px-4 py-4 text-gray-700 font-semibold">Consultancy Project</h1>
             </div>
-            <table border="1" class="w-full">
+            <table border="1" class="w-full table-auto">
                 <tr>
                     <th>Project Name</th>
                     <th>Leader</th>
@@ -43,12 +43,12 @@
                     @if ($cons->proj_stage == '6' AND $cons->proj_status == '5')
                         <td><h1 class=" text-gray-400">Closed</h1></td>
                     @else
-                        <td><a href="/editproj/{{$cons->id}}" class="text-blue-300 hover:text-blue-600">View Detail</a></td>
+                        <td><a href="/editproj/{{$cons->id}}" class="underline" style="color:rgb(0, 104, 122)">View Detail</a></td>
                     @endif
                     @if ($cons->proj_stage == '6' AND $cons->proj_status == '5')
                         <td><h1 class=" text-gray-400">Closed</h1></td>
                     @elseif($cons->proj_mem_num > 0)
-                        <td><a href="/editmember/{{$cons->id}}" class="text-indigo-300 hover:text-indigo-600">Manage Member</a></td>
+                        <td><a href="/editmember/{{$cons->id}}" class="underline" style="color:rgb(0, 104, 122)">Manage Member</a></td>
                     @else
                         <td><h1 class=" text-gray-400">No Member</h1></td>
                     @endif
@@ -67,7 +67,7 @@
             <div>
                 <h1 class="text-2xl px-4 py-4 text-gray-700 font-semibold">Research Grant Project</h1>
             </div>
-            <table border="1" class="w-full">
+            <table border="1" class="w-full table-auto">
                 <tr>
                     <th>Project Name</th>
                     <th>Leader</th>
@@ -84,12 +84,12 @@
                     @if ($rsch->proj_stage == '6' AND $rsch->proj_status == '5')
                         <td><h1 class=" text-gray-400">Closed</h1></td>
                     @else
-                        <td><a href="/editproj/{{$rsch->id}}" class="text-blue-300 hover:text-blue-600">View Detail</a></td>
+                        <td><a href="/editproj/{{$rsch->id}}" class="underline" style="color:rgb(0, 104, 122)">View Detail</a></td>
                     @endif
                     @if ($rsch->proj_stage == '6' AND $rsch->proj_status == '5')
                         <td><h1 class=" text-gray-400">Closed</h1></td>
                     @elseif($rsch->proj_mem_num > 0)
-                        <td><a href="/editmember/{{$rsch->id}}" class="text-indigo-300 hover:text-indigo-600">Manage Member</a></td>
+                        <td><a href="/editmember/{{$rsch->id}}" class="underline" style="color:rgb(0, 104, 122)">Manage Member</a></td>
                     @else
                         <td><h1 class=" text-gray-400">No Member</h1></td>
                     @endif

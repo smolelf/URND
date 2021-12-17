@@ -53,13 +53,13 @@
                     @endif
                     </td>
                     @if (Auth::user()->usertype == 1)
-                        <td><a href="/edituser/{{$data['id']}}">Edit</a></td>
+                        <td><a href="/edituser/{{$data['id']}}" class="underline" style="color:rgb(0, 104, 122)">Edit</a></td>
                     @endif
                     @if (Auth::user()->usertype == 1)
                         @if ($data['usertype'] == 1 OR $count != '[]')
                             <td><h1 class="text-gray-400">Delete</h1></td>
                         @else
-                            <td><a href="/deluser/{{$data['id']}}">Delete</a></td>
+                            <td><a href="/deluser/{{$data['id']}}" class="underline" style="color:rgb(0, 104, 122)">Delete</a></td>
                         @endif
                     @endif
                 </tr>
