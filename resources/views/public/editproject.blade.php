@@ -22,7 +22,7 @@
                 <x-jet-input id="proj_name" class="block mt-1 w-full" type="text" name="proj_name" value="{{$data->proj_name}}" required />
             </div>
 
-            <div>
+            <div class="hidden">
                 @if ($data->proj_type == 0)
                     {{$type = "Consultancy Project"}}
                 @else
@@ -32,7 +32,7 @@
 
             @if (Auth::user()->usertype != 1)
             <div class="mt-4">
-                <x-jet-label for="proj_type1" value="{{ __('Project Leader') }}" />
+                <x-jet-label for="proj_type1" value="{{ __('Project Type') }}" />
                 <x-jet-input id="proj_type1" class="block mt-1 w-full text-gray-400" type="text" name="proj_type1"
                 value="{{$type}}" readonly disabled />
             </div>
