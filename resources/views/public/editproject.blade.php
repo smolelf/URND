@@ -156,7 +156,7 @@
 
             <div class="flex items-center justify-end mt-4">
                 <x-jet-button>
-                    {{ __('Update User Details') }}
+                    {{ __('Update Project Details') }}
                 </x-jet-button>
             </div>
         </form>
